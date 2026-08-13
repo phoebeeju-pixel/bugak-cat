@@ -8,7 +8,7 @@
 
 설치 필요 없음 · 윈도우면 더블클릭 한 번 · 용량 20KB
 
-[**⬇️ 다운로드**](부각이_데스크탑고양이.zip?raw=1) &nbsp;·&nbsp; [사용법](사용법.txt)
+[**⬇️ 다운로드 (BugakCat.zip)**](https://github.com/phoebeeju-pixel/bugak-cat/raw/main/BugakCat.zip) &nbsp;·&nbsp; [사용법](사용법.txt)
 
 </div>
 
@@ -49,7 +49,7 @@
 
 ## 설치
 
-1. [**부각이_데스크탑고양이.zip**](부각이_데스크탑고양이.zip?raw=1) 다운로드
+1. [**BugakCat.zip 다운로드**](https://github.com/phoebeeju-pixel/bugak-cat/raw/main/BugakCat.zip)
 2. **압축 풀기** (ZIP 안에서 바로 실행하면 안 됩니다)
 3. **`고양이_실행.vbs`** 더블클릭
 
