@@ -1233,10 +1233,12 @@ function Finish-UpdateCheck {
     $remoteUrl = ""
     $remoteNote = ""
     try {
-        foreach ($line in ($task.Result -split "`n")) {
+        # 파일 앞에 BOM 이 붙어 있으면 첫 키를 못 읽으므로 먼저 떼어낸다
+        $body = ([string]$task.Result).TrimStart([char]0xFEFF)
+        foreach ($line in ($body -split "`n")) {
             $kv = $line -split "=", 2
             if ($kv.Count -eq 2) {
-                $k = $kv[0].Trim(); $v = $kv[1].Trim()
+                $k = $kv[0].Trim().Trim([char]0xFEFF); $v = $kv[1].Trim()
                 if ($k -eq "version") { $remoteVer = $v }
                 if ($k -eq "url")     { $remoteUrl = $v }
                 if ($k -eq "note")    { $remoteNote = $v }
