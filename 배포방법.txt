@@ -1,0 +1,106 @@
+﻿=========================================
+  부각이 배포 / 업데이트 방법  (만든 사람용)
+=========================================
+
+받는 사람은 이 파일을 볼 필요 없어요. "사용법.txt" 만 보면 됩니다.
+
+
+-----------------------------------------
+[ 처음 한 번만 하는 준비 ]
+-----------------------------------------
+
+1) GitHub 계정 만들기
+   https://github.com  -> Sign up (무료)
+
+2) 저장소(repository) 만들기
+   오른쪽 위 [+] -> New repository
+     Repository name : bugak-cat
+     Public 선택  (Private 으로 하면 친구들이 못 받아요)
+     나머지는 그대로 두고 [Create repository]
+
+3) 이 폴더를 GitHub 에 올리기
+   이 폴더에서 주소창에 cmd 를 치고 엔터 -> 검은 창이 뜨면 아래를 한 줄씩 붙여넣기
+   (USERNAME 은 본인 GitHub 아이디로 바꾸세요)
+
+     git init
+     git add .
+     git commit -m "부각이 첫 배포"
+     git branch -M main
+     git remote add origin https://github.com/USERNAME/bugak-cat.git
+     git push -u origin main
+
+   * 처음 push 할 때 로그인 창이 뜨면 GitHub 계정으로 로그인하면 됩니다.
+
+4) 주소 두 군데를 본인 것으로 고치기
+
+   (가) version.txt 를 메모장으로 열어서
+        url=https://github.com/USERNAME/bugak-cat/releases/latest
+        -> USERNAME 을 본인 아이디로
+
+   (나) CatPet.ps1 을 메모장으로 열어서 맨 위쪽의
+        $UpdateUrl = ""
+        -> 아래처럼 채우기 (USERNAME 만 바꾸면 됩니다)
+        $UpdateUrl = "https://raw.githubusercontent.com/USERNAME/bugak-cat/main/version.txt"
+
+   고쳤으면 다시 올리기:
+     git add .
+     git commit -m "배포 주소 설정"
+     git push
+
+5) 배포용 ZIP 올리기
+   저장소 페이지 오른쪽 [Releases] -> [Create a new release]
+     Tag  : v1.0.0
+     Title: v1.0.0
+     아래 첨부 칸에 "부각이_데스크탑고양이.zip" 을 끌어다 놓기
+     [Publish release]
+
+   이제 친구들에게는 저장소 주소만 알려주면 됩니다.
+     https://github.com/USERNAME/bugak-cat/releases/latest
+
+
+-----------------------------------------
+[ 부각이를 수정했을 때 (매번 이 순서) ]
+-----------------------------------------
+
+1) CatPet.ps1 맨 위의 버전 올리기
+     $AppVersion = "1.0.0"   ->   "1.1.0"
+
+2) version.txt 도 똑같이 고치고, 뭐가 바뀌었는지 한 줄 적기
+     version=1.1.0
+     url=https://github.com/USERNAME/bugak-cat/releases/latest
+     note=드래그로 위치 옮기기 추가
+
+3) 새 ZIP 만들기
+   CatPet.ps1 / 고양이_실행.vbs / RUN.bat / AutoStart.bat /
+   StartupToggle.ps1 / 부각이.ico / 사용법.txt
+   이 7개를 선택 -> 우클릭 -> 압축(ZIP)
+
+4) 올리기
+     git add .
+     git commit -m "v1.1.0 드래그 기능 추가"
+     git push
+
+5) Releases -> Create a new release -> Tag v1.1.0 -> 새 ZIP 첨부 -> Publish
+
+   => 친구들이 다음에 부각이를 켜면
+      "새 버전 v1.1.0 이 나왔어요" 알림이 뜨고,
+      트레이 아이콘 우클릭 -> "새 버전 받기" 를 누르면
+      다운로드 페이지가 열립니다.
+
+
+-----------------------------------------
+[ 알아두면 좋은 것 ]
+-----------------------------------------
+
+· 부각이는 인터넷에서 코드를 받아 실행하지 않습니다.
+  version.txt 라는 글자 몇 줄만 읽어서 버전만 비교해요.
+  그래서 백신에 걸릴 일이 없고, 계정이 털려도 남의 PC에서
+  코드가 저절로 실행되지는 않습니다.
+
+· 업데이트 확인은 켜진 뒤 20초 뒤에 딱 한 번,
+  트레이 메뉴의 "업데이트 확인" 으로는 아무 때나 할 수 있습니다.
+
+· settings.txt 는 사람마다 다른 개인 설정이라
+  .gitignore 에 넣어서 안 올라가게 해뒀습니다.
+
+· $UpdateUrl 을 비워두면 업데이트 확인 기능이 그냥 꺼집니다.
