@@ -21,6 +21,13 @@ Add-Type -AssemblyName WindowsBase
 Add-Type -AssemblyName System.Windows.Forms
 Add-Type -AssemblyName System.Drawing
 
+# ---- 중복 실행 방지 ----
+# 자동 실행과 수동 실행이 겹치면 부각이가 두 마리 뜨므로, 이미 떠 있으면 조용히 종료한다.
+$AppMutex = New-Object System.Threading.Mutex($false, "BugakCat_SingleInstance")
+$gotIt = $false
+try { $gotIt = $AppMutex.WaitOne(0, $false) } catch { $gotIt = $true }
+if (-not $gotIt) { exit }
+
 $AppDir = Split-Path -Parent $MyInvocation.MyCommand.Path
 $SettingsPath = Join-Path $AppDir "settings.txt"
 $SoundDir = Join-Path $env:TEMP "BugakCat"
